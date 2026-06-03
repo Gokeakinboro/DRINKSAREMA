@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.env
+.env.local
+.env.production
+.env.development
+dist/
+build/
+*.log
+.DS_Store
+Thumbs.db
+prisma.config.ts
+check-site.py
+deploy.py
+fix-nginx.py
+fix-seed.py

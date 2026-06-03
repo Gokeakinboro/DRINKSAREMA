@@ -1,0 +1,318 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  GUEST
+  CUSTOMER
+  CORPORATE
+  RIDER
+  VENDOR
+  CONTENT_MANAGER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAYMENT_CONFIRMED
+  PROCESSING
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+  REFUND_INITIATED
+  REFUNDED
+}
+
+enum DeliveryType {
+  ASAP
+  SCHEDULED
+}
+
+model User {
+  id               String    @id @default(uuid())
+  email            String?   @unique
+  phone            String?   @unique
+  passwordHash     String?
+  firstName        String?
+  lastName         String?
+  role             Role      @default(CUSTOMER)
+  isVerified       Boolean   @default(false)
+  ageVerified      Boolean   @default(false)
+  googleId         String?   @unique
+  loyaltyPoints    Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  deletedAt        DateTime?
+
+  addresses        Address[]
+  orders           Order[]
+  cartItems        CartItem[]
+  reviews          Review[]
+  wishlistItems    WishlistItem[]
+  loyaltyHistory   LoyaltyHistory[]
+  notifications    Notification[]
+  refreshTokens    RefreshToken[]
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Address {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label        String?
+  street       String
+  city         String
+  state        String
+  country      String   @default("Nigeria")
+  latitude     Float?
+  longitude    Float?
+  instructions String?
+  isDefault    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  orders       Order[]
+}
+
+model Category {
+  id           String      @id @default(uuid())
+  name         String      @unique
+  slug         String      @unique
+  description  String?
+  imageUrl     String?
+  parentId     String?
+  parent       Category?   @relation("CategoryTree", fields: [parentId], references: [id])
+  children     Category[]  @relation("CategoryTree")
+  sortOrder    Int         @default(0)
+  isActive     Boolean     @default(true)
+  products     Product[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model Product {
+  id              String   @id @default(uuid())
+  name            String
+  slug            String   @unique
+  brand           String
+  categoryId      String
+  category        Category @relation(fields: [categoryId], references: [id])
+  sku             String   @unique
+  description     String?
+  tastingNotes    String?
+  abv             Float?
+  volumeMl        Int?
+  unitPrice       Decimal  @db.Decimal(12, 2)
+  casePrice       Decimal? @db.Decimal(12, 2)
+  caseQty         Int?
+  stockQuantity   Int      @default(0)
+  images          String[]
+  countryOfOrigin String?
+  tags            String[]
+  nafdacNumber    String?
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  cartItems       CartItem[]
+  orderItems      OrderItem[]
+  reviews         Review[]
+  wishlistItems   WishlistItem[]
+}
+
+model CartItem {
+  id         String   @id @default(uuid())
+  userId     String?
+  sessionId  String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  quantity   Int      @default(1)
+  isCase     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, productId, isCase])
+  @@unique([sessionId, productId, isCase])
+}
+
+model Order {
+  id                String       @id @default(uuid())
+  orderNumber       String       @unique
+  userId            String
+  user              User         @relation(fields: [userId], references: [id])
+  addressId         String?
+  address           Address?     @relation(fields: [addressId], references: [id])
+  status            OrderStatus  @default(PENDING_PAYMENT)
+  deliveryType      DeliveryType @default(ASAP)
+  scheduledAt       DateTime?
+  subtotal          Decimal      @db.Decimal(12, 2)
+  deliveryFee       Decimal      @db.Decimal(12, 2)
+  discount          Decimal      @default(0) @db.Decimal(12, 2)
+  vat               Decimal      @db.Decimal(12, 2)
+  total             Decimal      @db.Decimal(12, 2)
+  promoCode         String?
+  pointsRedeemed    Int          @default(0)
+  pointsEarned      Int          @default(0)
+  paymentReference  String?
+  paymentMethod     String?
+  riderId           String?
+  deliveryNotes     String?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  items             OrderItem[]
+  payments          Payment[]
+  tracking          OrderTracking[]
+}
+
+model OrderItem {
+  id         String   @id @default(uuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  quantity   Int
+  isCase     Boolean  @default(false)
+  unitPrice  Decimal  @db.Decimal(12, 2)
+  subtotal   Decimal  @db.Decimal(12, 2)
+  createdAt  DateTime @default(now())
+}
+
+model Payment {
+  id          String   @id @default(uuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id])
+  reference   String   @unique
+  gateway     String
+  amount      Decimal  @db.Decimal(12, 2)
+  currency    String   @default("NGN")
+  status      String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model OrderTracking {
+  id        String      @id @default(uuid())
+  orderId   String
+  order     Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    OrderStatus
+  note      String?
+  createdAt DateTime    @default(now())
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  rating     Int
+  title      String?
+  body       String?
+  helpful    Int      @default(0)
+  isVerified Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, productId])
+}
+
+model WishlistItem {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model PromoCode {
+  id             String    @id @default(uuid())
+  code           String    @unique
+  type           String
+  value          Decimal   @db.Decimal(10, 2)
+  minOrderValue  Decimal?  @db.Decimal(12, 2)
+  maxUses        Int?
+  usesCount      Int       @default(0)
+  perUserLimit   Int       @default(1)
+  startDate      DateTime?
+  endDate        DateTime?
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model LoyaltySetting {
+  id              String   @id @default("singleton")
+  isActive        Boolean  @default(true)
+  earnRateNaira   Int      @default(100)  // ₦X spent = 1 point
+  redeemRate      Int      @default(100)  // 100 points = ₦100 discount
+  minRedeemPoints Int      @default(100)  // minimum to redeem at once
+  maxRedeemPct    Int      @default(20)   // max % of order value payable with points
+  updatedAt       DateTime @updatedAt
+}
+
+model LoyaltyHistory {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  points      Int
+  type        String
+  description String?
+  orderId     String?
+  createdAt   DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  body      String
+  type      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Banner {
+  id        String   @id @default(uuid())
+  title     String
+  imageUrl  String
+  linkUrl   String?
+  position  String
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  startDate DateTime?
+  endDate   DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DeliveryZone {
+  id            String   @id @default(uuid())
+  name          String
+  city          String
+  baseDeliveryFee Decimal @db.Decimal(10, 2)
+  freeThreshold Decimal? @db.Decimal(12, 2)
+  slaMins       Int
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

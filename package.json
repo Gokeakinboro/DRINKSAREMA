@@ -1,0 +1,17 @@
+{
+  "name": "drinks-arena",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down",
+    "setup": "cd backend && npm install && npx prisma generate && cd ../frontend && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
