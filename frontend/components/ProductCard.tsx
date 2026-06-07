@@ -60,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-          {isBestseller && <span className="badge bg-accent text-white">Bestseller</span>}
+          {isBestseller && <span className="badge bg-accent text-ink-primary">Bestseller</span>}
           {isNew && <span className="badge bg-success text-white">New</span>}
           {isPremium && <span className="badge bg-brand-primary text-white">Premium</span>}
           {isLowStock && <span className="badge bg-warning/90 text-white">Low Stock</span>}
@@ -95,7 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
             disabled={!inStock}
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               inStock
-                ? "bg-accent hover:bg-accent-dark text-white active:scale-95"
+                ? "bg-accent hover:bg-accent-dark text-ink-primary active:scale-95"
                 : "bg-gray-100 text-ink-muted cursor-not-allowed"
             }`}
             aria-label="Add to cart"

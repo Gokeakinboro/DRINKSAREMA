@@ -10,9 +10,26 @@ router.get('/', async (req, res, next) => {
       volumeMl, country, inStock, tags, sort = 'createdAt_desc',
       page = 1, limit = 24,
     } = req.query;
+    // subcategory handled below after category lookup
 
     const where = { isActive: true };
-    if (category) where.category = { slug: category };
+
+    if (category) {
+      const cat = await prisma.category.findFirst({
+        where: { slug: category },
+        include: { children: { where: { isActive: true } } },
+      });
+      if (cat) {
+        const ids = [cat.id, ...cat.children.map((c) => c.id)];
+        where.categoryId = { in: ids };
+      }
+    }
+
+    if (req.query.subcategory) {
+      where.category = { slug: req.query.subcategory };
+      delete where.categoryId;
+    }
+
     if (brand) where.brand = { contains: brand, mode: 'insensitive' };
     if (minPrice || maxPrice) where.unitPrice = {};
     if (minPrice) where.unitPrice.gte = parseFloat(minPrice);
@@ -58,8 +75,14 @@ router.get('/featured', async (req, res, next) => {
 // GET /products/:id
 router.get('/:id', async (req, res, next) => {
   try {
+    // Only include the id filter when the param looks like a UUID — passing a non-UUID
+    // string to a UUID column causes a Postgres type error and a 500 response.
+    const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    const idConditions = UUID_RE.test(req.params.id)
+      ? [{ id: req.params.id }, { slug: req.params.id }]
+      : [{ slug: req.params.id }];
     const product = await prisma.product.findFirst({
-      where: { OR: [{ id: req.params.id }, { slug: req.params.id }], isActive: true },
+      where: { OR: idConditions, isActive: true },
       include: {
         category: true,
         reviews: { include: { user: { select: { firstName: true, lastName: true } } }, take: 20 },

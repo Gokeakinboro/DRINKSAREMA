@@ -5,16 +5,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --brand-primary: #1A4731;
-  --brand-dark: #0F2D1F;
-  --accent: #C9A227;
-  --bg: #F4F7F4;
+  /* RGB channels (no rgb() wrapper) — required for Tailwind opacity utilities */
+  --brand-primary: 26 71 49;
+  --brand-dark: 15 45 31;
+  --brand-light: 35 96 63;
+  --accent: 201 162 39;
+  --accent-dark: 168 131 30;
+  --accent-light: 212 184 58;
+  --font-body: 'Inter', system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-body);
   background-color: #F4F7F4;
   color: #1A1A1A;
   -webkit-font-smoothing: antialiased;
@@ -22,7 +26,7 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-accent hover:bg-accent-dark text-ink-primary font-semibold px-6 py-3 rounded-lg transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   .btn-secondary {
     @apply bg-brand-primary hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 active:scale-95;

@@ -108,7 +108,7 @@ export function Header() {
             <Link href="/cart" className="relative p-2 text-white hover:text-accent transition-colors">
               <ShoppingCart size={22} />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-accent rounded-full text-white text-xs font-bold flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-accent rounded-full text-ink-primary text-xs font-bold flex items-center justify-center">
                   {cartCount > 9 ? "9+" : cartCount}
                 </span>
               )}

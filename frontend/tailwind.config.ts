@@ -10,14 +10,14 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          primary: "#1A4731",
-          dark: "#0F2D1F",
-          light: "#23603F",
+          primary: "rgb(var(--brand-primary) / <alpha-value>)",
+          dark: "rgb(var(--brand-dark) / <alpha-value>)",
+          light: "rgb(var(--brand-light) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#C9A227",
-          dark: "#A8831E",
-          light: "#D4B83A",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          dark: "rgb(var(--accent-dark) / <alpha-value>)",
+          light: "rgb(var(--accent-light) / <alpha-value>)",
         },
         surface: {
           DEFAULT: "#FFFFFF",

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuthStore } from "@/lib/store";
-import { LayoutDashboard, Package, ShoppingBag, Users, Tag, Layers, Star, BarChart2, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingBag, Users, Tag, Layers, Star, BarChart2, LogOut, Palette } from "lucide-react";
 
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -14,6 +14,7 @@ const NAV = [
   { href: "/admin/loyalty", label: "Loyalty", icon: Star },
   { href: "/admin/users", label: "Customers", icon: Users },
   { href: "/admin/promos", label: "Promotions", icon: Tag },
+  { href: "/admin/appearance", label: "Appearance", icon: Palette },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -38,7 +39,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${pathname === href ? "bg-accent text-white" : "text-white/60 hover:text-white hover:bg-white/10"}`}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${pathname === href ? "bg-accent text-ink-primary" : "text-white/60 hover:text-white hover:bg-white/10"}`}
             >
               <Icon size={17} />
               {label}

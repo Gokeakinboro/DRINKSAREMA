@@ -18,6 +18,7 @@ const searchRoutes = require('./routes/search');
 const uploadRoutes = require('./routes/upload');
 const zoneRoutes = require('./routes/zones');
 const bannerRoutes = require('./routes/banners');
+const settingsRoutes = require('./routes/settings');
 const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -49,6 +50,7 @@ app.use('/api/v1/search', searchRoutes);
 app.use('/api/v1/upload', uploadRoutes);
 app.use('/api/v1/zones', zoneRoutes);
 app.use('/api/v1/banners', bannerRoutes);
+app.use('/api/v1/settings', settingsRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 

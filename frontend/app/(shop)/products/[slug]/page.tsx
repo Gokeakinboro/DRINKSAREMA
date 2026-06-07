@@ -96,7 +96,7 @@ export default function ProductDetailPage() {
         {/* Details */}
         <div>
           <div className="flex flex-wrap gap-2 mb-3">
-            {product.tags?.includes("bestseller") && <span className="badge bg-accent text-white">Bestseller</span>}
+            {product.tags?.includes("bestseller") && <span className="badge bg-accent text-ink-primary">Bestseller</span>}
             {product.tags?.includes("new") && <span className="badge bg-success text-white">New</span>}
             {product.tags?.includes("premium") && <span className="badge bg-brand-primary text-white">Premium</span>}
             {!inStock && <span className="badge bg-gray-200 text-ink-secondary">Out of Stock</span>}

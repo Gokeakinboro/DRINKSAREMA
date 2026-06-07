@@ -229,7 +229,7 @@ router.get('/analytics', async (req, res, next) => {
       prodMap[id].units += item.quantity;
     }
     const topProducts = Object.values(prodMap)
-      .sort((a: any, b: any) => b.revenue - a.revenue)
+      .sort((a, b) => b.revenue - a.revenue)
       .slice(0, 10);
 
     const totalRevenue = allOrders.reduce((s, o) => s + Number(o.total), 0);
@@ -288,7 +288,7 @@ router.get('/analytics/export', async (req, res, next) => {
         where: { order: { createdAt: { gte: startDate }, status: { not: 'CANCELLED' } } },
         include: { product: { select: { name: true, brand: true, sku: true, category: { select: { name: true } } } } },
       });
-      const map: Record<string, any> = {};
+      const map = {};
       for (const item of items) {
         const id = item.productId;
         if (!map[id]) map[id] = { name: item.product?.name, brand: item.product?.brand, sku: item.product?.sku, category: item.product?.category?.name, units: 0, revenue: 0 };
@@ -296,7 +296,7 @@ router.get('/analytics/export', async (req, res, next) => {
         map[id].revenue += Number(item.subtotal);
       }
       csv = 'Product Name,Brand,SKU,Category,Units Sold,Revenue (NGN)\n';
-      for (const p of Object.values(map).sort((a: any, b: any) => b.revenue - a.revenue)) {
+      for (const p of Object.values(map).sort((a, b) => b.revenue - a.revenue)) {
         csv += [`"${p.name}"`, `"${p.brand}"`, `"${p.sku}"`, `"${p.category}"`, p.units, p.revenue.toFixed(2)].join(',') + '\n';
       }
     } else if (type === 'categories') {
@@ -304,7 +304,7 @@ router.get('/analytics/export', async (req, res, next) => {
         where: { order: { createdAt: { gte: startDate }, status: { not: 'CANCELLED' } } },
         include: { product: { select: { category: { select: { name: true } } } } },
       });
-      const catMap: Record<string, any> = {};
+      const catMap = {};
       for (const item of items) {
         const cat = item.product?.category?.name || 'Uncategorised';
         if (!catMap[cat]) catMap[cat] = { units: 0, revenue: 0 };
@@ -312,8 +312,8 @@ router.get('/analytics/export', async (req, res, next) => {
         catMap[cat].revenue += Number(item.subtotal);
       }
       csv = 'Category,Units Sold,Revenue (NGN)\n';
-      for (const [name, v] of Object.entries(catMap).sort((a: any, b: any) => b[1].revenue - a[1].revenue)) {
-        csv += [`"${name}"`, (v as any).units, (v as any).revenue.toFixed(2)].join(',') + '\n';
+      for (const [name, v] of Object.entries(catMap).sort((a, b) => b[1].revenue - a[1].revenue)) {
+        csv += [`"${name}"`, v.units, v.revenue.toFixed(2)].join(',') + '\n';
       }
     }
 
@@ -387,6 +387,28 @@ router.get('/loyalty/customers', async (req, res, next) => {
       prisma.user.count({ where }),
     ]);
     res.json({ customers, total, pages: Math.ceil(total / Number(limit)) });
+  } catch (err) { next(err); }
+});
+
+// GET /admin/settings/theme
+router.get('/settings/theme', async (req, res, next) => {
+  try {
+    let theme = await prisma.siteTheme.findUnique({ where: { id: 'singleton' } });
+    if (!theme) theme = await prisma.siteTheme.create({ data: { id: 'singleton' } });
+    res.json(theme);
+  } catch (err) { next(err); }
+});
+
+// PUT /admin/settings/theme
+router.put('/settings/theme', async (req, res, next) => {
+  try {
+    const { brandColour, accentColour, fontFamily, heroTitle, heroSubtitle, showFeaturedSection, showCategoriesSection, showPromoBanner } = req.body;
+    const theme = await prisma.siteTheme.upsert({
+      where: { id: 'singleton' },
+      update: { brandColour, accentColour, fontFamily, heroTitle, heroSubtitle, showFeaturedSection, showCategoriesSection, showPromoBanner },
+      create: { id: 'singleton', brandColour, accentColour, fontFamily, heroTitle, heroSubtitle, showFeaturedSection, showCategoriesSection, showPromoBanner },
+    });
+    res.json(theme);
   } catch (err) { next(err); }
 });
 
