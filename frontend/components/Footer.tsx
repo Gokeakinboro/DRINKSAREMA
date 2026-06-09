@@ -30,7 +30,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-white/90">Account</h3>
             <ul className="space-y-2 text-sm text-white/60">
-              {[["Sign In", "/auth/login"], ["Register", "/auth/register"], ["My Orders", "/orders"], ["Loyalty Points", "/loyalty"], ["Event Calculator", "/event-calculator"]].map(([name, href]) => (
+              {[["Sign In", "/auth/login"], ["Register", "/auth/register"], ["My Orders", "/orders"], ["Loyalty Points", "/profile?tab=loyalty"], ["Event Calculator", "/event-calculator"]].map(([name, href]) => (
                 <li key={href}><Link href={href} className="hover:text-accent transition-colors">{name}</Link></li>
               ))}
             </ul>

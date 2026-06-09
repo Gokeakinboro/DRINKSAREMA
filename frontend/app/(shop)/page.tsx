@@ -3,15 +3,15 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/api";
 import { ProductCard } from "@/components/ProductCard";
-import { ArrowRight, Zap, Shield, Clock, Star } from "lucide-react";
+import { ArrowRight, Zap, Shield, Clock, Star, Beer, Wine, GlassWater, Martini, CupSoda, Coffee } from "lucide-react";
 
 const CATEGORIES = [
-  { name: "Beer & Ciders", slug: "beer-ciders", emoji: "🍺", bg: "from-amber-400 to-amber-600", text: "text-gray-900" },
-  { name: "Wines", slug: "wines", emoji: "🍷", bg: "from-red-700 to-red-900", text: "text-white" },
-  { name: "Spirits", slug: "spirits", emoji: "🥃", bg: "from-amber-600 to-amber-800", text: "text-gray-900" },
-  { name: "Champagne", slug: "champagne-prosecco", emoji: "🥂", bg: "from-yellow-300 to-yellow-500", text: "text-gray-900" },
-  { name: "RTD", slug: "ready-to-drink", emoji: "🍹", bg: "from-pink-400 to-pink-600", text: "text-white" },
-  { name: "Non-Alcoholic", slug: "non-alcoholic", emoji: "🧃", bg: "from-green-400 to-green-600", text: "text-white" },
+  { name: "Beer & Ciders", slug: "beer-ciders", icon: Beer, bg: "from-amber-400 to-amber-600", text: "text-gray-900" },
+  { name: "Wines", slug: "wines", icon: Wine, bg: "from-red-700 to-red-900", text: "text-white" },
+  { name: "Spirits", slug: "spirits", icon: GlassWater, bg: "from-amber-600 to-amber-800", text: "text-gray-900" },
+  { name: "Champagne", slug: "champagne-prosecco", icon: Martini, bg: "from-yellow-300 to-yellow-500", text: "text-gray-900" },
+  { name: "RTD", slug: "ready-to-drink", icon: CupSoda, bg: "from-pink-400 to-pink-600", text: "text-white" },
+  { name: "Non-Alcoholic", slug: "non-alcoholic", icon: Coffee, bg: "from-green-400 to-green-600", text: "text-white" },
 ];
 
 export default function HomePage() {
@@ -48,14 +48,14 @@ export default function HomePage() {
       {showCategories && (
         <section className="bg-white border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:flex gap-3 w-full">
               {CATEGORIES.map((cat) => (
                 <Link
                   key={cat.slug}
                   href={`/category/${cat.slug}`}
-                  className={`flex-shrink-0 flex flex-col items-center gap-1.5 bg-gradient-to-br ${cat.bg} rounded-2xl px-5 py-3 ${cat.text} hover:scale-105 transition-transform duration-200 shadow-sm min-w-[90px]`}
+                  className={`md:flex-1 flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${cat.bg} rounded-2xl px-3 py-4 ${cat.text} hover:scale-105 transition-transform duration-200 shadow-sm`}
                 >
-                  <span className="text-2xl">{cat.emoji}</span>
+                  <cat.icon size={28} strokeWidth={1.5} />
                   <span className="text-xs font-semibold leading-tight text-center whitespace-nowrap">{cat.name}</span>
                 </Link>
               ))}
@@ -83,7 +83,7 @@ export default function HomePage() {
                 Shop Now <ArrowRight size={18} />
               </Link>
               <Link href="/event-calculator" className="bg-white/10 border border-white/20 text-white hover:bg-white/20 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 transition-all text-base">
-                🎉 Event Calculator
+                Event Calculator
               </Link>
             </div>
           </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useAuthStore, useCartStore } from "@/lib/store";
 import api from "@/lib/api";
 import toast from "react-hot-toast";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, ChevronLeft } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -36,7 +36,12 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen bg-surface-alt flex items-center justify-center p-4">
+    <div className="min-h-screen bg-surface-alt flex items-center justify-center p-4 relative">
+      <div className="absolute top-6 left-6 md:top-8 md:left-8">
+        <Link href="/" className="group flex items-center gap-1.5 text-ink-secondary hover:text-ink-primary font-medium text-sm transition-all bg-white hover:bg-gray-50 px-4 py-2 rounded-full shadow-sm border border-gray-100">
+          <ChevronLeft size={18} className="text-ink-muted group-hover:text-ink-primary transition-colors" /> Back to Home
+        </Link>
+      </div>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
