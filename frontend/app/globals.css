@@ -6,12 +6,12 @@
 
 :root {
   /* RGB channels (no rgb() wrapper) — required for Tailwind opacity utilities */
-  --brand-primary: 26 71 49;
-  --brand-dark: 15 45 31;
-  --brand-light: 35 96 63;
-  --accent: 201 162 39;
-  --accent-dark: 168 131 30;
-  --accent-light: 212 184 58;
+  --brand-primary: 117 13 61;
+  --brand-dark: 76 8 39;
+  --brand-light: 154 17 80;
+  --accent: 219 48 38;
+  --accent-dark: 166 36 29;
+  --accent-light: 232 82 73;
   --font-body: 'Inter', system-ui, sans-serif;
 }
 

@@ -74,7 +74,7 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 rounded-full px-4 py-1.5 mb-6">
               <Zap size={14} className="text-accent" />
-              <span className="text-accent text-sm font-semibold">Sub-60 minute delivery in Lagos</span>
+              <span className="text-black text-sm font-semibold">Sub-60 minute delivery in Lagos</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6">{heroTitle}</h1>
             <p className="text-white/70 text-lg mb-8 leading-relaxed">{heroSubtitle}</p>

@@ -61,7 +61,7 @@ export default function ContactPage() {
           <div className="bg-brand-primary text-surface p-10 lg:p-14 flex flex-col justify-between">
             <div>
               <h2 className="text-3xl font-bold mb-8">Get in Touch</h2>
-              <p className="text-brand-light mb-10 text-lg">
+              <p className="text-white/90 mb-10 text-lg">
                 Fill out the form and our team will get back to you within 24 hours.
               </p>
 
@@ -72,7 +72,7 @@ export default function ContactPage() {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-surface">Email</h3>
-                    <p className="mt-1 text-brand-light">drinxarena@gmail.com</p>
+                    <p className="mt-1 text-white/90">drinxarena@gmail.com</p>
                   </div>
                 </div>
 
@@ -82,7 +82,7 @@ export default function ContactPage() {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-surface">Phone</h3>
-                    <p className="mt-1 text-brand-light">08062122249</p>
+                    <p className="mt-1 text-white/90">08062122249</p>
                   </div>
                 </div>
 
@@ -92,14 +92,14 @@ export default function ContactPage() {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-surface">Address</h3>
-                    <p className="mt-1 text-brand-light">60, Allen Avenue<br/>Lagos, Nigeria</p>
+                    <p className="mt-1 text-white/90">60, Allen Avenue<br/>Lagos, Nigeria</p>
                   </div>
                 </div>
               </div>
             </div>
             
             <div className="mt-12">
-              <p className="text-sm text-brand-light opacity-80">
+              <p className="text-sm text-white/80">
                 Business Hours: Mon - Sat, 9:00 AM - 10:00 PM
               </p>
             </div>
