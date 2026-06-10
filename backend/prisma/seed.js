@@ -28,16 +28,16 @@ async function main() {
 
   // Categories
   const categories = [
-    { name: 'Beer & Ciders', slug: 'beer-ciders', sortOrder: 1 },
-    { name: 'Wines', slug: 'wines', sortOrder: 2 },
-    { name: 'Spirits', slug: 'spirits', sortOrder: 3 },
-    { name: 'Champagne & Prosecco', slug: 'champagne-prosecco', sortOrder: 4 },
-    { name: 'Aperitifs & Liqueurs', slug: 'aperitifs-liqueurs', sortOrder: 5 },
-    { name: 'Ready-to-Drink', slug: 'ready-to-drink', sortOrder: 6 },
-    { name: 'Non-Alcoholic', slug: 'non-alcoholic', sortOrder: 7 },
-    { name: 'Snacks & Mixers', slug: 'snacks-mixers', sortOrder: 8 },
-    { name: 'Gift Sets & Hampers', slug: 'gift-sets-hampers', sortOrder: 9 },
-    { name: 'Party Supplies', slug: 'party-supplies', sortOrder: 10 },
+    { name: 'Beer & Ciders', slug: 'Beer-Ciders', sortOrder: 1 },
+    { name: 'Wines', slug: 'Wines', sortOrder: 2 },
+    { name: 'Spirits', slug: 'Spirits', sortOrder: 3 },
+    { name: 'Champagne & Prosecco', slug: 'Champagne-Prosecco', sortOrder: 4 },
+    { name: 'Aperitifs & Liqueurs', slug: 'Aperitifs-Liqueurs', sortOrder: 5 },
+    { name: 'Ready-to-Drink', slug: 'Ready-to-Drink', sortOrder: 6 },
+    { name: 'Non-Alcoholic', slug: 'Non-Alcoholic', sortOrder: 7 },
+    { name: 'Snacks & Mixers', slug: 'Snacks-Mixers', sortOrder: 8 },
+    { name: 'Gift Sets & Hampers', slug: 'Gift-Sets-Hampers', sortOrder: 9 },
+    { name: 'Party Supplies', slug: 'Party-Supplies', sortOrder: 10 },
   ];
 
   for (const cat of categories) {
@@ -45,67 +45,67 @@ async function main() {
   }
   console.log('Categories seeded');
 
-  const beerCat       = await prisma.category.findUnique({ where: { slug: 'beer-ciders' } });
-  const winesCat      = await prisma.category.findUnique({ where: { slug: 'wines' } });
-  const spiritsCat    = await prisma.category.findUnique({ where: { slug: 'spirits' } });
-  const champagneCat  = await prisma.category.findUnique({ where: { slug: 'champagne-prosecco' } });
-  const aperitifsCat  = await prisma.category.findUnique({ where: { slug: 'aperitifs-liqueurs' } });
-  const rtdCat        = await prisma.category.findUnique({ where: { slug: 'ready-to-drink' } });
-  const nonAlcCat     = await prisma.category.findUnique({ where: { slug: 'non-alcoholic' } });
-  const snacksCat     = await prisma.category.findUnique({ where: { slug: 'snacks-mixers' } });
-  const giftsCat      = await prisma.category.findUnique({ where: { slug: 'gift-sets-hampers' } });
-  const partyCat      = await prisma.category.findUnique({ where: { slug: 'party-supplies' } });
+  const beerCat       = await prisma.category.findUnique({ where: { slug: 'Beer-Ciders' } });
+  const winesCat      = await prisma.category.findUnique({ where: { slug: 'Wines' } });
+  const spiritsCat    = await prisma.category.findUnique({ where: { slug: 'Spirits' } });
+  const champagneCat  = await prisma.category.findUnique({ where: { slug: 'Champagne-Prosecco' } });
+  const aperitifsCat  = await prisma.category.findUnique({ where: { slug: 'Aperitifs-Liqueurs' } });
+  const rtdCat        = await prisma.category.findUnique({ where: { slug: 'Ready-to-Drink' } });
+  const nonAlcCat     = await prisma.category.findUnique({ where: { slug: 'Non-Alcoholic' } });
+  const snacksCat     = await prisma.category.findUnique({ where: { slug: 'Snacks-Mixers' } });
+  const giftsCat      = await prisma.category.findUnique({ where: { slug: 'Gift-Sets-Hampers' } });
+  const partyCat      = await prisma.category.findUnique({ where: { slug: 'Party-Supplies' } });
 
   // Subcategories
   const subcategories = [
     // Beer & Ciders
-    { name: 'Lager',       slug: 'lager',       parentId: beerCat.id,      sortOrder: 1 },
-    { name: 'Stout',       slug: 'stout',        parentId: beerCat.id,      sortOrder: 2 },
-    { name: 'IPA',         slug: 'ipa',          parentId: beerCat.id,      sortOrder: 3 },
-    { name: 'Ciders',      slug: 'ciders',       parentId: beerCat.id,      sortOrder: 4 },
-    { name: 'Craft Beer',  slug: 'craft-beer',   parentId: beerCat.id,      sortOrder: 5 },
+    { name: 'Lager',       slug: 'Lager',       parentId: beerCat.id,      sortOrder: 1 },
+    { name: 'Stout',       slug: 'Stout',        parentId: beerCat.id,      sortOrder: 2 },
+    { name: 'IPA',         slug: 'IPA',          parentId: beerCat.id,      sortOrder: 3 },
+    { name: 'Ciders',      slug: 'Ciders',       parentId: beerCat.id,      sortOrder: 4 },
+    { name: 'Craft Beer',  slug: 'Craft-Beer',   parentId: beerCat.id,      sortOrder: 5 },
     // Wines
-    { name: 'Red Wine',    slug: 'red-wine',     parentId: winesCat.id,     sortOrder: 1 },
-    { name: 'White Wine',  slug: 'white-wine',   parentId: winesCat.id,     sortOrder: 2 },
-    { name: 'Rosé',        slug: 'rose',         parentId: winesCat.id,     sortOrder: 3 },
-    { name: 'Sparkling',   slug: 'sparkling',    parentId: winesCat.id,     sortOrder: 4 },
-    { name: 'Port',        slug: 'port',         parentId: winesCat.id,     sortOrder: 5 },
+    { name: 'Red Wine',    slug: 'Red-Wine',     parentId: winesCat.id,     sortOrder: 1 },
+    { name: 'White Wine',  slug: 'White-Wine',   parentId: winesCat.id,     sortOrder: 2 },
+    { name: 'Rosé',        slug: 'Rosé',         parentId: winesCat.id,     sortOrder: 3 },
+    { name: 'Sparkling',   slug: 'Sparkling',    parentId: winesCat.id,     sortOrder: 4 },
+    { name: 'Port',        slug: 'Port',         parentId: winesCat.id,     sortOrder: 5 },
     // Spirits
-    { name: 'Whiskey',     slug: 'whiskey',      parentId: spiritsCat.id,   sortOrder: 1 },
-    { name: 'Vodka',       slug: 'vodka',        parentId: spiritsCat.id,   sortOrder: 2 },
-    { name: 'Gin',         slug: 'gin',          parentId: spiritsCat.id,   sortOrder: 3 },
-    { name: 'Rum',         slug: 'rum',          parentId: spiritsCat.id,   sortOrder: 4 },
-    { name: 'Brandy',      slug: 'brandy',       parentId: spiritsCat.id,   sortOrder: 5 },
-    { name: 'Tequila',     slug: 'tequila',      parentId: spiritsCat.id,   sortOrder: 6 },
-    { name: 'Liqueurs',    slug: 'liqueurs',     parentId: spiritsCat.id,   sortOrder: 7 },
+    { name: 'Whiskey',     slug: 'Whiskey',      parentId: spiritsCat.id,   sortOrder: 1 },
+    { name: 'Vodka',       slug: 'Vodka',        parentId: spiritsCat.id,   sortOrder: 2 },
+    { name: 'Gin',         slug: 'Gin',          parentId: spiritsCat.id,   sortOrder: 3 },
+    { name: 'Rum',         slug: 'Rum',          parentId: spiritsCat.id,   sortOrder: 4 },
+    { name: 'Brandy',      slug: 'Brandy',       parentId: spiritsCat.id,   sortOrder: 5 },
+    { name: 'Tequila',     slug: 'Tequila',      parentId: spiritsCat.id,   sortOrder: 6 },
+    { name: 'Liqueurs',    slug: 'Liqueurs',     parentId: spiritsCat.id,   sortOrder: 7 },
     // Champagne & Prosecco
-    { name: 'Champagne',   slug: 'champagne',    parentId: champagneCat.id, sortOrder: 1 },
-    { name: 'Prosecco',    slug: 'prosecco',     parentId: champagneCat.id, sortOrder: 2 },
-    { name: 'Cava',        slug: 'cava',         parentId: champagneCat.id, sortOrder: 3 },
+    { name: 'Champagne',   slug: 'Champagne',    parentId: champagneCat.id, sortOrder: 1 },
+    { name: 'Prosecco',    slug: 'Prosecco',     parentId: champagneCat.id, sortOrder: 2 },
+    { name: 'Cava',        slug: 'Cava',         parentId: champagneCat.id, sortOrder: 3 },
     // Aperitifs & Liqueurs
-    { name: 'Aperitifs',   slug: 'aperitifs',    parentId: aperitifsCat.id, sortOrder: 1 },
-    { name: 'Cordials',    slug: 'cordials',     parentId: aperitifsCat.id, sortOrder: 2 },
-    { name: 'Bitters',     slug: 'bitters',      parentId: aperitifsCat.id, sortOrder: 3 },
+    { name: 'Aperitifs',   slug: 'Aperitifs',    parentId: aperitifsCat.id, sortOrder: 1 },
+    { name: 'Cordials',    slug: 'Cordials',     parentId: aperitifsCat.id, sortOrder: 2 },
+    { name: 'Bitters',     slug: 'Bitters',      parentId: aperitifsCat.id, sortOrder: 3 },
     // Ready-to-Drink
-    { name: 'Cocktails',   slug: 'cocktails',    parentId: rtdCat.id,       sortOrder: 1 },
-    { name: 'Seltzers',    slug: 'seltzers',     parentId: rtdCat.id,       sortOrder: 2 },
-    { name: 'Flavoured',   slug: 'flavoured',    parentId: rtdCat.id,       sortOrder: 3 },
+    { name: 'Cocktails',   slug: 'Cocktails',    parentId: rtdCat.id,       sortOrder: 1 },
+    { name: 'Seltzers',    slug: 'Seltzers',     parentId: rtdCat.id,       sortOrder: 2 },
+    { name: 'Flavoured',   slug: 'Flavoured',    parentId: rtdCat.id,       sortOrder: 3 },
     // Non-Alcoholic
-    { name: 'Juices',      slug: 'juices',       parentId: nonAlcCat.id,    sortOrder: 1 },
-    { name: 'Mocktails',   slug: 'mocktails',    parentId: nonAlcCat.id,    sortOrder: 2 },
-    { name: 'Water',       slug: 'water',        parentId: nonAlcCat.id,    sortOrder: 3 },
-    { name: 'Sodas',       slug: 'sodas',        parentId: nonAlcCat.id,    sortOrder: 4 },
+    { name: 'Juices',      slug: 'Juices',       parentId: nonAlcCat.id,    sortOrder: 1 },
+    { name: 'Mocktails',   slug: 'Mocktails',    parentId: nonAlcCat.id,    sortOrder: 2 },
+    { name: 'Water',       slug: 'Water',        parentId: nonAlcCat.id,    sortOrder: 3 },
+    { name: 'Sodas',       slug: 'Sodas',        parentId: nonAlcCat.id,    sortOrder: 4 },
     // Snacks & Mixers
-    { name: 'Mixers',      slug: 'mixers',       parentId: snacksCat.id,    sortOrder: 1 },
-    { name: 'Snacks',      slug: 'snacks',       parentId: snacksCat.id,    sortOrder: 2 },
-    { name: 'Garnishes',   slug: 'garnishes',    parentId: snacksCat.id,    sortOrder: 3 },
+    { name: 'Mixers',      slug: 'Mixers',       parentId: snacksCat.id,    sortOrder: 1 },
+    { name: 'Snacks',      slug: 'Snacks',       parentId: snacksCat.id,    sortOrder: 2 },
+    { name: 'Garnishes',   slug: 'Garnishes',    parentId: snacksCat.id,    sortOrder: 3 },
     // Gift Sets & Hampers
-    { name: 'Gift Sets',   slug: 'gift-sets',    parentId: giftsCat.id,     sortOrder: 1 },
-    { name: 'Hampers',     slug: 'hampers',      parentId: giftsCat.id,     sortOrder: 2 },
+    { name: 'Gift Sets',   slug: 'Gift Sets',    parentId: giftsCat.id,     sortOrder: 1 },
+    { name: 'Hampers',     slug: 'Hampers',      parentId: giftsCat.id,     sortOrder: 2 },
     // Party Supplies
-    { name: 'Glasses',     slug: 'glasses',      parentId: partyCat.id,     sortOrder: 1 },
-    { name: 'Ice & Coolers', slug: 'ice-coolers', parentId: partyCat.id,    sortOrder: 2 },
-    { name: 'Decorations', slug: 'decorations',  parentId: partyCat.id,     sortOrder: 3 },
+    { name: 'Glasses',     slug: 'Glasses',      parentId: partyCat.id,     sortOrder: 1 },
+    { name: 'Ice & Coolers', slug: 'Ice & Coolers', parentId: partyCat.id,    sortOrder: 2 },
+    { name: 'Decorations', slug: 'Decorations',  parentId: partyCat.id,     sortOrder: 3 },
   ];
 
   for (const sub of subcategories) {
@@ -125,9 +125,9 @@ async function main() {
 
   // Sample products — assigned to subcategories where possible
   const products = [
-    { name: 'Heineken Lager Beer 60cl', slug: 'heineken-lager-60cl', brand: 'Heineken', categoryId: lagerSub.id, sku: 'HNK-LAG-60', description: 'The world-famous Dutch lager with a clean, crisp taste.', abv: 5.0, volumeMl: 600, unitPrice: 800, casePrice: 18000, caseQty: 24, stockQuantity: 120, images: ['https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400'], countryOfOrigin: 'Netherlands', tags: ['bestseller'], isFeatured: true },
+    { name: 'Heineken Lager Beer 60cl', slug: 'Heineken-lager-60cl', brand: 'Heineken', categoryId: lagerSub.id, sku: 'HNK-LAG-60', description: 'The world-famous Dutch lager with a clean, crisp taste.', abv: 5.0, volumeMl: 600, unitPrice: 800, casePrice: 18000, caseQty: 24, stockQuantity: 120, images: ['https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400'], countryOfOrigin: 'Netherlands', tags: ['bestseller'], isFeatured: true },
     { name: 'Guinness Foreign Extra Stout 60cl', slug: 'guinness-fes-60cl', brand: 'Guinness', categoryId: stoutSub.id, sku: 'GNS-FES-60', description: 'Rich, full-bodied stout with roasted barley flavour.', abv: 7.5, volumeMl: 600, unitPrice: 900, casePrice: 20000, caseQty: 24, stockQuantity: 80, images: ['https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400'], countryOfOrigin: 'Nigeria', tags: ['bestseller'], isFeatured: true },
-    { name: 'Trophy Lager 60cl', slug: 'trophy-lager-60cl', brand: 'Trophy', categoryId: lagerSub.id, sku: 'TRP-LAG-60', description: 'Premium Nigerian lager beer with a refreshing taste.', abv: 5.1, volumeMl: 600, unitPrice: 700, casePrice: 15500, caseQty: 24, stockQuantity: 200, images: ['https://images.unsplash.com/photo-1518176258769-f227c798150e?w=400'], countryOfOrigin: 'Nigeria', tags: [] },
+    { name: 'Trophy Lager 60cl', slug: 'Trophy-lager-60cl', brand: 'Trophy', categoryId: lagerSub.id, sku: 'TRP-LAG-60', description: 'Premium Nigerian lager beer with a refreshing taste.', abv: 5.1, volumeMl: 600, unitPrice: 700, casePrice: 15500, caseQty: 24, stockQuantity: 200, images: ['https://images.unsplash.com/photo-1518176258769-f227c798150e?w=400'], countryOfOrigin: 'Nigeria', tags: [] },
     { name: 'Johnnie Walker Black Label 75cl', slug: 'jw-black-label-75cl', brand: 'Johnnie Walker', categoryId: whiskeysSub.id, sku: 'JW-BLK-75', description: 'A premium 12-year-old blended Scotch whisky with hints of dark fruit and spice.', abv: 40.0, volumeMl: 750, unitPrice: 28000, casePrice: 300000, caseQty: 12, stockQuantity: 35, images: ['https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=400'], countryOfOrigin: 'Scotland', tags: ['bestseller', 'premium'], isFeatured: true },
     { name: 'Hennessy VS Cognac 70cl', slug: 'hennessy-vs-70cl', brand: 'Hennessy', categoryId: brandySub.id, sku: 'HNS-VS-70', description: 'The world\'s best-selling Cognac with a rich amber colour and intense bouquet.', abv: 40.0, volumeMl: 700, unitPrice: 32000, casePrice: 350000, caseQty: 12, stockQuantity: 28, images: ['https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=400'], countryOfOrigin: 'France', tags: ['bestseller', 'premium'], isFeatured: true },
     { name: 'Ciroc Vodka 75cl', slug: 'ciroc-vodka-75cl', brand: 'Ciroc', categoryId: vodkaSub.id, sku: 'CRC-VDK-75', description: 'Premium ultra-premium vodka made from fine French grapes.', abv: 40.0, volumeMl: 750, unitPrice: 25000, stockQuantity: 22, images: ['https://images.unsplash.com/photo-1612528443702-f6741f70a049?w=400'], countryOfOrigin: 'France', tags: ['premium'] },

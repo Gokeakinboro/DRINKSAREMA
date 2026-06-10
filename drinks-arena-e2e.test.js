@@ -185,7 +185,7 @@ test.describe('Homepage', () => {
 test.describe('Category Pages', () => {
   test.beforeEach(async ({ page }) => { await bypassAgeGate(page); });
 
-  const categories = ['beer-ciders', 'wines', 'spirits', 'champagne-prosecco', 'ready-to-drink'];
+  const categories = ['Beer-ciders', 'Wines', 'Spirits', 'Champagne-prosecco', 'Ready-to-drink'];
 
   for (const slug of categories) {
     test(`category "${slug}" page loads`, async ({ page }) => {

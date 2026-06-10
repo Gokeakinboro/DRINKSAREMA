@@ -6,12 +6,12 @@ import { ProductCard } from "@/components/ProductCard";
 import { ArrowRight, Zap, Shield, Clock, Star, Beer, Wine, GlassWater, Martini, CupSoda, Coffee } from "lucide-react";
 
 const CATEGORIES = [
-  { name: "Beer & Ciders", slug: "beer-ciders", icon: Beer, bg: "from-amber-400 to-amber-600", text: "text-gray-900" },
-  { name: "Wines", slug: "wines", icon: Wine, bg: "from-red-700 to-red-900", text: "text-white" },
-  { name: "Spirits", slug: "spirits", icon: GlassWater, bg: "from-amber-600 to-amber-800", text: "text-gray-900" },
-  { name: "Champagne", slug: "champagne-prosecco", icon: Martini, bg: "from-yellow-300 to-yellow-500", text: "text-gray-900" },
-  { name: "RTD", slug: "ready-to-drink", icon: CupSoda, bg: "from-pink-400 to-pink-600", text: "text-white" },
-  { name: "Non-Alcoholic", slug: "non-alcoholic", icon: Coffee, bg: "from-green-400 to-green-600", text: "text-white" },
+  { name: "Beer & Ciders", slug: "Beer-Ciders", icon: Beer, bg: "from-amber-400 to-amber-600", text: "text-gray-900" },
+  { name: "Wines", slug: "Wines", icon: Wine, bg: "from-red-700 to-red-900", text: "text-white" },
+  { name: "Spirits", slug: "Spirits", icon: GlassWater, bg: "from-amber-600 to-amber-800", text: "text-gray-900" },
+  { name: "Champagne", slug: "Champagne-Prosecco", icon: Martini, bg: "from-yellow-300 to-yellow-500", text: "text-gray-900" },
+  { name: "Ready-to-Drink", slug: "Ready-to-Drink", icon: CupSoda, bg: "from-pink-400 to-pink-600", text: "text-white" },
+  { name: "Non-Alcoholic", slug: "Non-Alcoholic", icon: Coffee, bg: "from-green-400 to-green-600", text: "text-white" },
 ];
 
 export default function HomePage() {
@@ -72,9 +72,9 @@ export default function HomePage() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 rounded-full px-4 py-1.5 mb-6">
-              <Zap size={14} className="text-accent" />
-              <span className="text-black text-sm font-semibold">Sub-60 minute delivery in Lagos</span>
+            <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2 mb-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)] shadow-black/20 border border-white/40 ring-4 ring-white/10">
+              <Zap size={16} className="text-accent fill-accent" />
+              <span className="text-black text-sm font-bold tracking-tight uppercase">Sub-60 min delivery in Lagos</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6">{heroTitle}</h1>
             <p className="text-white/70 text-lg mb-8 leading-relaxed">{heroSubtitle}</p>

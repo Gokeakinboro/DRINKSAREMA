@@ -7,12 +7,12 @@ import { useAuthStore, useCartStore } from "@/lib/store";
 import api from "@/lib/api";
 
 const NAV_CATEGORIES = [
-  { name: "Beer & Ciders", slug: "beer-ciders" },
-  { name: "Wines", slug: "wines" },
-  { name: "Spirits", slug: "spirits" },
-  { name: "Champagne", slug: "champagne-prosecco" },
-  { name: "Ready-to-Drink", slug: "ready-to-drink" },
-  { name: "Non-Alcoholic", slug: "non-alcoholic" },
+  { name: "Beer & Ciders", slug: "Beer-Ciders" },
+  { name: "Wines", slug: "Wines" },
+  { name: "Spirits", slug: "Spirits" },
+  { name: "Champagne", slug: "Champagnedrinks arena colour code sdf" },
+  { name: "Ready-to-Drink", slug: "Ready-to-Drink" },
+  { name: "Non-Alcoholic", slug: "Non-Alcoholic" },
 ];
 
 export function Header() {
@@ -63,7 +63,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center gap-2">
             <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-sm">
-              <span className="text-brand-dark font-black text-sm">DA</span>
+              <span className="text-white font-black text-sm">DA</span>
             </div>
             <span className="text-white font-black text-2xl tracking-tight hidden lg:block">
               Drinks<span className="text-accent">Arena</span>
@@ -110,10 +110,10 @@ export function Header() {
             </button>
 
             {/* Cart */}
-            <Link href="/cart" className="relative p-2 text-white/90 hover:text-accent transition-colors">
+            <Link href="/cart" className="relative p-2 text-white/90 hover:text-white transition-colors">
               <ShoppingBag size={24} strokeWidth={1.5} />
               {cartCount > 0 && (
-                <span className="absolute top-0 right-0 w-5 h-5 bg-accent rounded-full text-brand-dark text-xs font-bold flex items-center justify-center border-2 border-brand-primary">
+                <span className="absolute top-0 right-0 w-5 h-5 bg-accent rounded-full text-white text-xs font-bold flex items-center justify-center border-2 border-brand-primary">
                   {cartCount > 9 ? "9+" : cartCount}
                 </span>
               )}
@@ -152,7 +152,7 @@ export function Header() {
             ) : (
               <div className="hidden md:flex items-center gap-3">
                 <Link href="/auth/login" className="text-white/90 font-medium text-sm hover:text-white transition-colors px-2">Log in</Link>
-                <Link href="/auth/register" className="bg-accent hover:bg-accent-light text-brand-dark font-bold py-2 px-5 rounded-full text-sm transition-all shadow-sm">Sign Up</Link>
+                <Link href="/auth/register" className="bg-accent hover:bg-accent-light text-white font-bold py-2 px-5 rounded-full text-sm transition-all shadow-sm">Sign Up</Link>
               </div>
             )}
 
@@ -201,7 +201,7 @@ export function Header() {
           {!isAuthenticated && (
             <div className="p-4 border-t border-white/10 flex flex-col gap-3">
               <Link href="/auth/login" className="btn-outline w-full text-center py-2.5 text-sm border-white text-white hover:bg-white hover:text-brand-primary" onClick={() => setMobileOpen(false)}>Log In</Link>
-              <Link href="/auth/register" className="bg-accent text-brand-dark font-bold w-full text-center py-2.5 text-sm rounded-full" onClick={() => setMobileOpen(false)}>Sign Up</Link>
+              <Link href="/auth/register" className="bg-accent text-white font-bold w-full text-center py-2.5 text-sm rounded-full" onClick={() => setMobileOpen(false)}>Sign Up</Link>
             </div>
           )}
         </div>

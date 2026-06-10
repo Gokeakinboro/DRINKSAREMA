@@ -99,7 +99,7 @@ export default function ContactPage() {
             </div>
             
             <div className="mt-12">
-              <p className="text-sm text-white/80">
+              <p className="text-sm text-white/70">
                 Business Hours: Mon - Sat, 9:00 AM - 10:00 PM
               </p>
             </div>
